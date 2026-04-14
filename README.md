@@ -37,6 +37,10 @@ The workbook remains part of the operating workflow. This project supports a pra
 
 This is intentional. The app does not mutate the workbook implicitly after every UI action, which keeps file changes predictable for a local dealership workflow and avoids hidden spreadsheet writes.
 
+The workbook file is intentionally not committed to the public repository. The expected default path is `./data/workbook/Master_Spreadsheet_TRIAL_sanitised.xlsx`. On a fresh clone, place the workbook file at that path before running workbook import/export flows.
+
+On first run, the backend only auto-imports the workbook if the database is empty and the configured workbook file exists. If the workbook file is absent, the app still starts locally, the automatic first-run import is skipped, and the system starts in an empty local state when the database is empty. Explicit workbook import/export flows require the workbook file to be present.
+
 Import the workbook into SQLite with an explicit sync step:
 
 ```bash
@@ -54,8 +58,6 @@ Export the current SQLite state back into a workbook copy with an explicit write
 This provides a safe write-back flow for spreadsheet-based review or handoff without implicit file mutation during day-to-day app usage.
 
 Warnings should be treated as non-blocking when they relate to preserved legacy sheets or skipped ambiguous rows. In that case, the sync has completed safely; it is not a failed import, but deliberate handling of workbook ambiguity.
-
-The backend also auto-imports the configured workbook on first run if the local database is empty.
 
 ## Smoke test
 
