@@ -9,7 +9,6 @@ data/*.sqlite
 data/*.sqlite-shm
 data/*.sqlite-wal
 data/*.db
-data/workbook/*.xlsx
 data/workbook/exports/
 data/workbook/runtime/
 
